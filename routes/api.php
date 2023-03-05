@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\ColorsController;
+use App\Http\Controllers\TagsController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,10 +16,6 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 //Route::group([
 //
@@ -34,9 +32,25 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //
 //});
 
-Route::controller(AuthController::class)->prefix('auth')->group(function () {
-    Route::post('login', 'login');
-    Route::post('register', 'register');
+//Route::get('/unauthorized', function () {
+//    return response()->json(['error' => 'Unauthorized'], 401);
+//})->name('Unauthorized');
 
-    Route::post('profile', 'userProfile');
+Route::controller(AuthController::class)->prefix('auth')->group(function () {
+    Route::post('login', 'login')->name('login');
+    Route::post('profile', 'GetProfile')->name('GetProfile');
 });
+
+Route::controller(UsersController::class)->prefix('users')->group(function () {
+    Route::post('new', 'NewUser')->name('NewUser');
+});
+
+Route::controller(ColorsController::class)->prefix('colors')->group(function () {
+    Route::post('where', 'GetColors')->name('GetColors');
+});
+
+Route::controller(TagsController::class)->prefix('tags')->group(function () {
+    Route::post('where', 'GetTags')->name('GetTags');
+    Route::post('new', 'NewTag')->name('NewTag');
+});
+
