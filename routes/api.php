@@ -17,25 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::group([
-//
-//    'middleware' => 'api',
-//    'prefix' => 'auth'
-//
-//], function ($router) {
-//
-//    Route::post('login', 'AuthController@login');
-//    Route::post('register', 'AuthController@register');
-//    Route::post('logout', 'AuthController@logout');
-//    Route::post('refresh', 'AuthController@refresh');
-//    Route::post('profile', 'AuthController@profile');
-//
-//});
-
-//Route::get('/unauthorized', function () {
-//    return response()->json(['error' => 'Unauthorized'], 401);
-//})->name('Unauthorized');
-
 Route::controller(AuthController::class)->prefix('auth')->group(function () {
     Route::post('login', 'login')->name('login');
     Route::post('profile', 'GetProfile')->name('GetProfile');
@@ -46,6 +27,8 @@ Route::controller(UsersController::class)->prefix('users')->group(function () {
 });
 
 Route::controller(ColorsController::class)->prefix('colors')->group(function () {
+    Route::post('new', 'NewColor')->name('NewColor');
+    Route::put('update', 'UpdateColor')->name('UpdateColor');
     Route::post('where', 'GetColors')->name('GetColors');
 });
 

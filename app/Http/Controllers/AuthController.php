@@ -37,6 +37,11 @@ class AuthController extends Controller
         return $this->newToken($token);
     }
 
+    /**
+     * Logout the current user
+     *
+     * @return JsonResponse
+     */
     public function logout(): JsonResponse
     {
         auth()->logout();
@@ -45,11 +50,21 @@ class AuthController extends Controller
 
     }
 
+    /**
+     * Get a new token for the current user
+     *
+     * @return JsonResponse
+     */
     public function refresh(): JsonResponse
     {
         return $this->newToken(auth()->refresh());
     }
 
+    /**
+     * Get info belongs to the current user
+     *
+     * @return JsonResponse
+     */
     public function GetProfile(): JsonResponse
     {
         return response()->json(auth()->user());
