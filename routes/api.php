@@ -27,6 +27,7 @@ Route::controller(UsersController::class)->prefix('users')->group(function () {
 });
 
 Route::controller(ColorsController::class)->prefix('colors')->group(function () {
+    Route::get('show/{id}', 'ShowColor')->whereNumber('id')->name('ShowColor');
     Route::post('new', 'NewColor')->name('NewColor');
     Route::put('update', 'UpdateColor')->name('UpdateColor');
     Route::post('where', 'GetColors')->name('GetColors');

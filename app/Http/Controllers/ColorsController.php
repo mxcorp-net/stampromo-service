@@ -15,6 +15,16 @@ class ColorsController extends Controller
     }
 
     /**
+     * @param $id
+     * @return JsonResponse
+     */
+    public function ShowColor($id): JsonResponse
+    {
+        $color = Color::where('id', $id)->firstOrFail();
+        return response()->json($color);
+    }
+
+    /**
      * Create a new color
      *
      * @param Request $request
@@ -73,6 +83,10 @@ class ColorsController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function GetColors(Request $request): JsonResponse
     {
         // TODO: implement search by name, hex, status and dates
