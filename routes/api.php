@@ -36,7 +36,7 @@ Route::controller(ColorsController::class)->prefix('colors')->group(function () 
 Route::controller(TagsController::class)->prefix('tags')->group(function () {
     Route::get('show/{id}', 'ShowTag')->whereNumber('id')->name('ShowTag');
     Route::delete('delete/{id}', 'DeleteTag')->whereNumber('id')->name('DeleteTag');
-    Route::post('where', 'GetTags')->name('GetTags');
+    Route::post('where', 'WhereTags')->name('WhereTags');
     Route::post('new', 'NewTag')->name('NewTag');
     Route::put('update', 'UpdateTag')->name('UpdateTag');
 });

@@ -59,7 +59,7 @@ class TagsController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function GetTags(Request $request): JsonResponse
+    public function WhereTags(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
             'words' => 'required|array'
@@ -69,12 +69,17 @@ class TagsController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
-        $tags = Tag::where('status', 1)->where(function ($query) use ($request) {
-            // 'word', $request->get('words')
-            foreach ($request->get('words') as $w) {
-                $query->orWhere('word', 'like', '%' . $w . '%');
-            }
-        })->get();
+        // TODO: add paginator
+        $words = $request->get('words');
+        if($words[0] == '*'){
+            $tags = Tag::all();
+        }else{
+            $tags = Tag::where('status', 1)->where(function ($query) use ($request) {
+                foreach ($request->get('words') as $w) {
+                    $query->orWhere('word', 'like', '%' . $w . '%');
+                }
+            })->get();
+        }
 
         return response()->json($tags);
     }
