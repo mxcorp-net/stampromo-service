@@ -87,9 +87,11 @@ class ColorsController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function GetColors(Request $request): JsonResponse
+    public function WhereColors(Request $request): JsonResponse
     {
         // TODO: implement search by name, hex, status and dates
-        return response()->json($request->all());
+        // TODO: add paginator
+        $colors = Color::all();
+        return response()->json($colors);
     }
 }
