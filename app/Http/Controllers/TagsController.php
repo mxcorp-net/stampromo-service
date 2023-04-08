@@ -71,11 +71,11 @@ class TagsController extends Controller
 
         // TODO: add paginator
         $words = $request->get('words');
-        if($words[0] == '*'){
+        if ($words[0] == '*') {
             $tags = Tag::all();
-        }else{
-            $tags = Tag::where('status', 1)->where(function ($query) use ($request) {
-                foreach ($request->get('words') as $w) {
+        } else {
+            $tags = Tag::where('status', 1)->where(function ($query) use ($request, $words) {
+                foreach ($words as $w) {
                     $query->orWhere('word', 'like', '%' . $w . '%');
                 }
             })->get();

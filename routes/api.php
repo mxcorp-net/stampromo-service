@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ColorsController;
+use App\Http\Controllers\FamiliesController;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,13 @@ Route::controller(AuthController::class)->prefix('auth')->group(function () {
 
 Route::controller(UsersController::class)->prefix('users')->group(function () {
     Route::post('new', 'NewUser')->name('NewUser');
+});
+
+Route::controller(FamiliesController::class)->prefix('families')->group(function () {
+    Route::get('show/{id}', 'ShowFamilies')->whereNumber('id')->name('ShowFamilies');
+    Route::post('new', 'NewFamilies')->name('NewFamilies');
+    Route::put('update', 'UpdateFamilies')->name('UpdateFamilies');
+    Route::post('where', 'WhereFamilies')->name('WhereFamilies');
 });
 
 Route::controller(ColorsController::class)->prefix('colors')->group(function () {
