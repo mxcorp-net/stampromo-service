@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ColorsController;
-use App\Http\Controllers\FamiliesController;
+use App\Http\Controllers\Families\FamiliesController;
+use App\Http\Controllers\Families\FamilyAttributesController;
+use App\Http\Controllers\Products\ProductsController;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -28,10 +30,17 @@ Route::controller(UsersController::class)->prefix('users')->group(function () {
 });
 
 Route::controller(FamiliesController::class)->prefix('families')->group(function () {
-    Route::get('show/{id}', 'ShowFamilies')->whereNumber('id')->name('ShowFamilies');
-    Route::post('new', 'NewFamilies')->name('NewFamilies');
-    Route::put('update', 'UpdateFamilies')->name('UpdateFamilies');
+    Route::get('show/{id}', 'ShowFamily')->whereNumber('id')->name('ShowFamily');
+    Route::post('new', 'NewFamily')->name('NewFamily');
+    Route::put('update', 'UpdateFamily')->name('UpdateFamily');
     Route::post('where', 'WhereFamilies')->name('WhereFamilies');
+
+    Route::get('{id}/attributes', 'GetFamilyAttributes')->name('GetFamilyAttributes');
+});
+
+Route::controller(FamilyAttributesController::class)->prefix('families/attributes')->group(function () {
+    Route::post('new', 'NewAttribute')->name('NewAttribute');
+    Route::put('update', 'UpdateAttribute')->name('UpdateAttribute');
 });
 
 Route::controller(ColorsController::class)->prefix('colors')->group(function () {
@@ -47,5 +56,9 @@ Route::controller(TagsController::class)->prefix('tags')->group(function () {
     Route::post('where', 'WhereTags')->name('WhereTags');
     Route::post('new', 'NewTag')->name('NewTag');
     Route::put('update', 'UpdateTag')->name('UpdateTag');
+});
+
+Route::controller(ProductsController::class)->prefix('products')->group(function () {
+    Route::post('where', 'WhereProducts')->name('WhereProducts');
 });
 

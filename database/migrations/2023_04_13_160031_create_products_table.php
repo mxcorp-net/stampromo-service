@@ -13,10 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('families', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100)->nullable(false);
             $table->text('description');
+            $table->foreignId('provider_id')->constrained();
+            $table->foreignId('family_id')->constrained();
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('families');
+        Schema::dropIfExists('products');
     }
 };
