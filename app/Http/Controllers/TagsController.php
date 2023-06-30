@@ -62,7 +62,7 @@ class TagsController extends Controller
     public function WhereTags(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
-            'words' => 'required|array'
+            'words' => 'required'
         ]);
 
         if ($validator->fails()) {

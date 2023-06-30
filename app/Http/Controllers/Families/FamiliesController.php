@@ -25,19 +25,18 @@ class FamiliesController extends Controller
     public function WhereFamilies(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
-            'words' => 'required|array'
+            'text' => 'required|string|min:1'
         ]);
 
         if ($validator->fails()) return response()->json($validator->errors(), 400);
 
-        // TODO: add paginator
-        $words = $request->get('words');
+        $words = explode(' ', $request->get('text'));
         if ($words[0] == '*') {
             $families = Family::all();
         } else {
             $families = Family::where('status', 1)->where(function ($query) use ($request, $words) {
                 foreach ($words as $w) {
-                    $query->orWhere('name', 'like', '%' . $w . '%');
+                    $query->orWhere('name', 'like', '%' . $w . '%'); // TODO: improve query
                 }
             })->get();
         }

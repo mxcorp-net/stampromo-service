@@ -107,7 +107,7 @@ class ColorsController extends Controller
                     $query->orWhere('name', 'like', '%' . $w . '%');
                 }
 
-                // TODO: improve filters
+                // TODO: improve filtersx
             })->get();
         }
 
