@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Products;
+namespace App\Http\Controllers\Admin\Products;
 
 use App\Exceptions\BadRequestException;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
-class ProductsController extends Controller
+class AdminProductsController extends Controller
 {
     public function __construct()
     {

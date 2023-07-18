@@ -12,13 +12,10 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('products', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 100)->unique()->nullable(false);
-            $table->text('description');
-            $table->foreignId('provider_id')->constrained();
-            $table->foreignId('family_id')->constrained();
-            $table->tinyInteger('status')->default(1);
+        Schema::create('product_children', function (Blueprint $table) {
+            $table->id(); //TODO: replace for SKU auto-generated
+            $table->foreignId('product_id')->constrained();
+            $table->foreignId('color_id')->constrained();
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('product_children');
     }
 };

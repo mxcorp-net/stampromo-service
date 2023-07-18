@@ -14,6 +14,8 @@ class ColorSeeder extends Seeder
      */
     public function run()
     {
+        //TODO: use model class
+
         DB::table('colors')->insert([
             'name' => 'Amarillo',
             'hex'=> 'ffff00 '

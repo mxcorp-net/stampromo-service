@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Families;
+namespace App\Http\Controllers\Admin\Families;
 
 use App\Http\Controllers\Controller;
 use App\Models\Family;
 use App\Models\FamilyAttribute;
-use http\Env\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
