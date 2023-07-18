@@ -87,9 +87,31 @@ class ColorsController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function GetColors(Request $request): JsonResponse
+    public function WhereColors(Request $request): JsonResponse
     {
-        // TODO: implement search by name, hex, status and dates
-        return response()->json($request->all());
+        $validator = Validator::make($request->all(), [
+            'words' => 'required|array'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        // TODO: add paginator
+        $words = $request->get('words');
+        if ($words[0] == '*') {
+            $colors = Color::all();
+        } else {
+            $colors = Color::where('status', 1)->where(function ($query) use ($request, $words) {
+                foreach ($words as $w) {
+                    $query->orWhere('name', 'like', '%' . $w . '%');
+                }
+
+                // TODO: improve filtersx
+            })->get();
+        }
+
+
+        return response()->json($colors);
     }
 }

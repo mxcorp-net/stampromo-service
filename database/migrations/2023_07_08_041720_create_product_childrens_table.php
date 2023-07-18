@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -13,11 +12,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('families', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 100)->nullable(false);
-            $table->text('description');
-            $table->tinyInteger('status')->default(1);
+        Schema::create('product_children', function (Blueprint $table) {
+            $table->id(); //TODO: replace for SKU auto-generated
+            $table->foreignId('product_id')->constrained();
+            $table->foreignId('color_id')->constrained();
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('families');
+        Schema::dropIfExists('product_children');
     }
 };

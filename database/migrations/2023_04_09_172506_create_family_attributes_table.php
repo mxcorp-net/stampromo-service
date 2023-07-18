@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -13,11 +12,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('families', function (Blueprint $table) {
+        Schema::create('family_attributes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('family_id')->constrained();
             $table->string('name', 100)->nullable(false);
-            $table->text('description');
-            $table->tinyInteger('status')->default(1);
+            $table->string('type',10)->nullable(false);
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('families');
+        Schema::dropIfExists('family_attributes');
     }
 };

@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('providers', function (Blueprint $table) {
             $table->id();
-            $table->string('name',100)->nullable(false);
-            $table->string('business_name',200)->nullable();
-            $table->string('rfc',15)->nullable(false);
+            $table->string('name', 100)->nullable(false);
+            $table->string('business_name', 200)->nullable(false);
+            $table->string('rfc', 20)->nullable(false);
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
