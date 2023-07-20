@@ -12,7 +12,8 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        DB::unprepared("create procedure Store_GetProducts(IN color int)
+        DB::unprepared("drop procedure Store_GetProducts;
+create procedure Store_GetProducts(IN color int)
 BEGIN
     select p.id    as id,
            p.name  as name,
